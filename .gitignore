@@ -21,3 +21,26 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+
+# User secrets (por si acaso, aunque .NET los guarda fuera del repo)
+secrets.json
+
+# Node
+node_modules/
+dist/
+.vite/
+*.log
+
+# Entorno
+.env
+.env.local
+appsettings.*.local.json
+
+# Visual Studio
+.vs/
