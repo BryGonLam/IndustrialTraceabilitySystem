@@ -1,4 +1,5 @@
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
+using IndustrialTraceabilitySystem.Api.Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +17,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await DataSeeder.SeedAsync(db);
 }
 
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
