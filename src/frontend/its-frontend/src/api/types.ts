@@ -101,3 +101,51 @@ export const ProductionOrderStatusLabels: Record<number, string> = {
     2: 'Closed',
     3: 'Cancelled',
 };
+
+export interface ProductionOrderDetail {
+    id: number;
+    orderNumber: string;
+    productId: number;
+    productCode: string;
+    productName: string;
+    productionLineId: number;
+    productionLineCode: string;
+    productionLineName: string;
+    plannedQuantity: number;
+    status: number;
+    createdAt: string;
+    updatedAt: string | null;
+    totalUnits: number;
+    units: {
+        id: number;
+        serialNumber: string;
+        status: number;
+        createdAt: string;
+    }[];
+}
+
+export interface CreateProductionEventRequest {
+    unitId: number;
+    stationId: number;
+    userId?: number;
+    eventType: number;
+    result?: number | null;
+    notes?: string | null;
+    occurredAt?: string | null;
+}
+
+export interface ProductionEvent {
+    id: number;
+    unitId: number;
+    serialNumber: string;
+    stationId: number;
+    stationCode: string;
+    stationName: string;
+    userId: number | null;
+    username: string | null;
+    eventType: number;
+    result: number | null;
+    notes: string | null;
+    occurredAt: string;
+    createdAt: string;
+}

@@ -40,4 +40,25 @@ public class StationsController : ControllerBase
 
         return Ok(station);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<StationResponse>>> GetAll()
+    {
+        var stations = await _context.Stations
+            .AsNoTracking()
+            .OrderBy(s => s.ProductionLineId)
+            .ThenBy(s => s.Code)
+            .Select(s => new StationResponse
+            {
+                Id = s.Id,
+                ProductionLineId = s.ProductionLineId,
+                Code = s.Code,
+                Name = s.Name,
+                IsActive = s.IsActive,
+                CreatedAt = s.CreatedAt
+            })
+            .ToListAsync();
+
+        return Ok(stations);
+    }
 }

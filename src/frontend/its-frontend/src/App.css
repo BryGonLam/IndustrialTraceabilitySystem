@@ -44,10 +44,270 @@
   font-weight: 600;
 }
 
-.table tr:hover {
+.row-clickable {
+  cursor: pointer;
+}
+
+.row-clickable:hover {
   background: #fafafa;
+}
+
+.row-selected {
+  background: #eef4ff;
+  cursor: pointer;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.badge-green  { background: #2e7d32; }
+.badge-red    { background: #c62828; }
+.badge-yellow { background: #f9a825; color: #222; }
+.badge-orange { background: #ef6c00; }
+.badge-gray   { background: #757575; }
+
+/* History section */
+.history-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.history-header h3 {
+  margin: 0;
+}
+
+.btn-close {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-close:hover {
+  background: #eee;
+}
+
+.history-meta p {
+  margin: 0.25rem 0;
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 45px;
+  width: 2px;
+  background: #ddd;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.timeline-marker {
+  flex-shrink: 0;
+  width: 90px;
+  text-align: right;
+  padding-top: 0.15rem;
+  z-index: 1;
+}
+
+.timeline-body {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.timeline-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.timeline-code {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.timeline-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.timeline-notes {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #333;
+  font-style: italic;
 }
 
 .error {
   color: #b00020;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: #222;
+}
+
+.tab-active {
+  color: #1976d2;
+  border-bottom-color: #1976d2;
+  font-weight: 600;
+}
+
+/* Nested history section (dentro del detalle de la orden) */
+.history-section-nested {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed #ccc;
+  background: #fff;
+}
+
+/* Forms */
+.form {
+  max-width: 480px;
+  margin-top: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.form-row select,
+.form-row input,
+.form-row textarea {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.form-row select:focus,
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: #1976d2;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #1565c0;
+}
+
+.btn-primary:disabled {
+  background: #90caf9;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #f5f5f5;
+}
+
+.success-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 4px;
+}
+
+.success-box p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
 }
