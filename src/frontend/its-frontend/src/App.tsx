@@ -1,15 +1,12 @@
-import { useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
+import { AppNav } from './components/AppNav';
 import { ProductsPage } from './pages/ProductsPage';
 import { UnitsPage } from './pages/UnitsPage';
 import { ProductionOrdersPage } from './pages/ProductionOrdersPage';
 import { RegisterEventPage } from './pages/RegisterEventPage';
 
-type Tab = 'units' | 'orders' | 'register' | 'products';
-
 function App() {
-  const [tab, setTab] = useState<Tab>('units');
-
   return (
     <div className="app">
       <header className="app-header">
@@ -17,40 +14,28 @@ function App() {
         <p>Fictitious industrial traceability system</p>
       </header>
 
-      <nav className="tabs">
-        <button
-          className={tab === 'units' ? 'tab tab-active' : 'tab'}
-          onClick={() => setTab('units')}
-        >
-          Units
-        </button>
-        <button
-          className={tab === 'orders' ? 'tab tab-active' : 'tab'}
-          onClick={() => setTab('orders')}
-        >
-          Orders
-        </button>
-        <button
-          className={tab === 'register' ? 'tab tab-active' : 'tab'}
-          onClick={() => setTab('register')}
-        >
-          Register Event
-        </button>
-        <button
-          className={tab === 'products' ? 'tab tab-active' : 'tab'}
-          onClick={() => setTab('products')}
-        >
-          Products
-        </button>
-      </nav>
+      <AppNav />
 
       <main className="app-main">
-        {tab === 'units' && <UnitsPage />}
-        {tab === 'orders' && <ProductionOrdersPage />}
-        {tab === 'register' && <RegisterEventPage />}
-        {tab === 'products' && <ProductsPage />}
+        <Routes>
+          <Route path="/" element={<Navigate to="/units" replace />} />
+          <Route path="/units" element={<UnitsPage />} />
+          <Route path="/orders" element={<ProductionOrdersPage />} />
+          <Route path="/register" element={<RegisterEventPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
     </div>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <section>
+      <h2>Page not found</h2>
+      <p>The page you are looking for does not exist.</p>
+    </section>
   );
 }
 
