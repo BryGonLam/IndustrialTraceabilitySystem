@@ -2,15 +2,16 @@
 using IndustrialTraceabilitySystem.Api.Domain.Entities;
 using IndustrialTraceabilitySystem.Api.Domain.Enums;
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace IndustrialTraceabilitySystem.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/production-events")]
-[Authorize]
+[Authorize(Roles = "Admin,Supervisor,Operator,Quality")]
 public class ProductionEventsController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -122,33 +123,30 @@ public class ProductionEventsController : ControllerBase
     public async Task<ActionResult<ProductionEventResponse>> Create([FromBody] CreateProductionEventRequest request)
     {
         // [B. G. L.] 07/10/2026 1. Validar que la unidad existe
+        var sub = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub");
+        if (sub is null || !int.TryParse(sub, out var userId))
+        {
+            return Unauthorized(new { error = new { code = "INVALID_TOKEN", message = "Token does not contain a valid user id." } });
+        }
+
+        // [B. G. L.] 07/10/2026 2. Validar que la estacion existe
         var unit = await _context.Units.FirstOrDefaultAsync(u => u.Id == request.UnitId);
         if (unit is null)
         {
             return NotFound(new { error = new { code = "UNIT_NOT_FOUND", message = $"Unit with id {request.UnitId} was not found." } });
         }
 
-        // [B. G. L.] 07/10/2026 2. Validar que la estacion existe
+        // [B. G. L.] 07/10/2026 3. Regla de negocio: una unidad Scrapped no puede registrar mas eventos
         var station = await _context.Stations.FirstOrDefaultAsync(s => s.Id == request.StationId);
         if (station is null)
         {
             return NotFound(new { error = new { code = "STATION_NOT_FOUND", message = $"Station with id {request.StationId} was not found." } });
         }
 
-        // [B. G. L.] 07/10/2026 3. Regla de negocio: una unidad Scrapped no puede registrar mas eventos
+        // [B. G. L.] 07/10/2026 4. Validar que el usuario existe (si lo mandan)
         if (unit.Status == UnitStatus.Scrapped)
         {
             return Conflict(new { error = new { code = "UNIT_ALREADY_SCRAPPED", message = "The unit is scrapped and cannot register new events." } });
-        }
-
-        // [B. G. L.] 07/10/2026 4. Validar que el usuario existe (si lo mandan)
-        if (request.UserId.HasValue)
-        {
-            var userExists = await _context.Users.AnyAsync(u => u.Id == request.UserId.Value);
-            if (!userExists)
-            {
-                return NotFound(new { error = new { code = "USER_NOT_FOUND", message = $"User with id {request.UserId} was not found." } });
-            }
         }
 
         // [B. G. L.] 07/10/2026 5. Crear el evento
@@ -156,7 +154,7 @@ public class ProductionEventsController : ControllerBase
         {
             UnitId = request.UnitId,
             StationId = request.StationId,
-            UserId = request.UserId,
+            UserId = userId,
             EventType = request.EventType,
             Result = request.Result,
             Notes = request.Notes,
