@@ -5,6 +5,7 @@ import { ProductsPage } from './pages/ProductsPage';
 import { UnitsPage } from './pages/UnitsPage';
 import { ProductionOrdersPage } from './pages/ProductionOrdersPage';
 import { RegisterEventPage } from './pages/RegisterEventPage';
+import { MonitoringPage } from './pages/MonitoringPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/orders" element={<ProductionOrdersPage />} />
           <Route path="/register" element={<RegisterEventPage />} />
           <Route path="/products" element={<ProductsPage />} />
+          <Route path="/monitoring" element={<MonitoringPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

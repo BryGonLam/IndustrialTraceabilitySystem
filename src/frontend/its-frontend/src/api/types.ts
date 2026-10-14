@@ -149,3 +149,40 @@ export interface ProductionEvent {
     occurredAt: string;
     createdAt: string;
 }
+
+export interface DashboardSummary {
+    totalProducts: number;
+    totalLines: number;
+    totalStations: number;
+    totalOrders: number;
+    activeOrders: number;
+    totalUnits: number;
+    totalEvents: number;
+    generatedAt: string;
+}
+
+export interface LineStatus {
+    lineId: number;
+    lineCode: string;
+    lineName: string;
+    totalStations: number;
+    activeOrders: number;
+    totalUnits: number;
+}
+
+export interface UnitsSummary {
+    total: number;
+    created: number;
+    inProgress: number;
+    onHold: number;
+    inRework: number;
+    passed: number;
+    scrapped: number;
+    eventsByType: { eventType: string; count: number }[];
+    eventsByStation: {
+        stationId: number;
+        stationCode: string;
+        stationName: string;
+        count: number;
+    }[];
+}
