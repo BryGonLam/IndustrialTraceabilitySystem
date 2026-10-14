@@ -3,11 +3,13 @@ using IndustrialTraceabilitySystem.Api.Application.Dtos.Stations;
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IndustrialTraceabilitySystem.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/production-lines")]
+[Authorize]
 public class ProductionLinesController : ControllerBase
 {
     private readonly AppDbContext _context;

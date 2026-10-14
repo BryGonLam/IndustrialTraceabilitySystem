@@ -2,12 +2,14 @@
 using IndustrialTraceabilitySystem.Api.Domain.Enums;
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace IndustrialTraceabilitySystem.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/units")]
+[Authorize]
 public class UnitsController : ControllerBase
 {
     private readonly AppDbContext _context;

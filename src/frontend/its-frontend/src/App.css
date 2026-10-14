@@ -365,3 +365,83 @@ h3 {
   margin-bottom: 0.5rem;
   font-size: 1rem;
 }
+
+/* Navigation with user */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.nav-container .tabs {
+  margin-bottom: 0;
+  border-bottom: none;
+  flex: 1;
+}
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.nav-user-name {
+  font-weight: 600;
+  color: #222;
+}
+
+.nav-user-role {
+  color: #666;
+  font-size: 0.75rem;
+  background: #f0f0f0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+.btn-logout {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.btn-logout:hover {
+  background: #eee;
+  color: #222;
+}
+
+/* Login */
+.login-section {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.login-section h2 {
+  margin-top: 0;
+}
+
+.login-hint {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+.login-hint code {
+  background: #eee;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}

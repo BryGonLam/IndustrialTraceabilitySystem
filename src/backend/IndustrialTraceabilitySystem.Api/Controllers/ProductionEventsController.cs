@@ -4,11 +4,13 @@ using IndustrialTraceabilitySystem.Api.Domain.Enums;
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IndustrialTraceabilitySystem.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/production-events")]
+[Authorize]
 public class ProductionEventsController : ControllerBase
 {
     private readonly AppDbContext _context;

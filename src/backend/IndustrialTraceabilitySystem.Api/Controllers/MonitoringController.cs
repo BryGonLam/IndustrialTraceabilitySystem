@@ -3,11 +3,13 @@ using IndustrialTraceabilitySystem.Api.Domain.Enums;
 using IndustrialTraceabilitySystem.Api.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IndustrialTraceabilitySystem.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/monitoring")]
+[Authorize]
 public class MonitoringController : ControllerBase
 {
     private readonly AppDbContext _context;
